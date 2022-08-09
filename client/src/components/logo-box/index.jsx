@@ -10,8 +10,8 @@ const StyledBox = styled(Box)(({ theme }) => ({
   justifyContent: 'center',
   alignItems: 'center',
   [theme.breakpoints.up('sm')]: {
-    height: '10vw',
-    width: '10vw',
+    height: '8vw',
+    width: '8vw',
   },
   [theme.breakpoints.up('md')]: {
     height: '7vw',
@@ -24,10 +24,10 @@ const StyledBox = styled(Box)(({ theme }) => ({
   },
 }));
 
-const ImageBox = ({ imgUrl }) => {
+const LogoBox = ({ imgUrl }) => {
   return (
     <StyledBox sx={{ backgroundImage: `url(${imgUrl})`}}></StyledBox>
   )
 }
 
-export default ImageBox;
+export default LogoBox;

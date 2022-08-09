@@ -1,7 +1,7 @@
 import { Box, Link, styled, Typography } from '@mui/material';
 import React, { useEffect, useState } from 'react'
 import CompanyService from '../../services/company-service';
-import ImageBox from '../image-box';
+import LogoBox from '../logo-box';
 
 const StyledBox = styled(Box)(({ theme }) => ({
   display: 'flex',
@@ -35,7 +35,7 @@ const CompanyInfo = ({ company }) => {
         <Typography sx={{ fontSize: '3vw' }}>{companyProfile.ticker}</Typography>
         <Typography>{companyProfile.name}</Typography>
       </StyledBox>
-      <ImageBox imgUrl={companyProfile.logo}  />
+      <LogoBox imgUrl={companyProfile.logo}  />
       <StyledBox>
         <Link href={companyProfile.weburl}>{companyProfile.weburl}</Link>
         <Typography sx={{ textAlign: 'end' }}>{companyProfile.country}</Typography>
