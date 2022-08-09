@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react'
 import CompanyService from '../../services/company-service';
 import DatePicker from '../date-picker';
 import ResolutionSelect from '../resolution-select';
-
 import dayjs from 'dayjs';
 import CandlestickChart from '../candlestick-chart';
 
@@ -63,15 +62,12 @@ const StockCandleChart = ({ company }) => {
     setResolution(value)
   }
 
-  
-
   return (
     <Box>
       <DatePicker handleFromChange={handleFromChange} handleToChange={handleToChange} fromValue={fromValue} toValue={toValue} />
       <ResolutionSelect handleResolution={handleResolution} resolution={resolution} />
       <CandlestickChart stockCandleData={stockCandleData} />
     </Box>
-
   )
 }
 
