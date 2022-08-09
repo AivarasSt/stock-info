@@ -1,6 +1,13 @@
-import { Box, Typography } from '@mui/material';
+import { Box, Link, styled, Typography } from '@mui/material';
 import React, { useEffect, useState } from 'react'
 import CompanyService from '../../services/company-service';
+import ImageBox from '../image-box';
+
+const StyledBox = styled(Box)(({ theme }) => ({
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'end',
+}));
 
 const CompanyInfo = ({ company }) => {
   const [selectedCompany, setSelectedCompany] = useState('')
@@ -23,13 +30,19 @@ const CompanyInfo = ({ company }) => {
   }, [selectedCompany])
 
   return (
-    <Box>
-      <Typography>{companyProfile.name}</Typography>
-      <Typography>{companyProfile.country}</Typography>
-      <Typography>{companyProfile.currency}</Typography>
-      <Typography>{companyProfile.ticker}</Typography>
-      <Typography>{companyProfile.weburl}</Typography>
+    <Box sx={{ display: 'flex', justifyContent: 'space-between', m: '1vw', p: '5px', borderBottom: '1px solid'}}>
+      <StyledBox>
+        <Typography sx={{ fontSize: '3vw' }}>{companyProfile.ticker}</Typography>
+        <Typography>{companyProfile.name}</Typography>
+      </StyledBox>
+      <ImageBox imgUrl={companyProfile.logo}  />
+      <StyledBox>
+        <Link href={companyProfile.weburl}>{companyProfile.weburl}</Link>
+        <Typography sx={{ textAlign: 'end' }}>{companyProfile.country}</Typography>
+        <Typography sx={{ textAlign: 'end' }}>{companyProfile.currency}</Typography>
+      </StyledBox>
     </Box>
+
   )
 }
 
