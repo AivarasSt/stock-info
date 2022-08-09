@@ -12,7 +12,7 @@ const CandlestickChart = ({ stockCandleData }) => {
       type: 'datetime',
       tickPlacement: 'on',
       labels: {
-        formatter: function(val) {
+        formatter: function (val) {
           return dayjs.unix(val).format('MMM DD HH:mm')
         }
       }
@@ -33,11 +33,11 @@ const CandlestickChart = ({ stockCandleData }) => {
 
   return (
     <Chart
-              options={options}
-              series={series}
-              type="candlestick"
-              width="800"
-            />
+      options={options}
+      series={series}
+      type="candlestick"
+      width="800"
+    />
   )
 }
 
