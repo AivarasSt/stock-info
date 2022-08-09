@@ -17,4 +17,11 @@ router.get('/search', (req, res) => {
   });
 })
 
+router.get('/company/:symbol', (req, res) => {
+  finnhubClient.companyProfile2({'symbol': `${req.params.symbol}`}, (error, data, response) => {
+    console.log(data)
+    res.status(200).send(data)
+  });
+})
+
 module.exports = router;
