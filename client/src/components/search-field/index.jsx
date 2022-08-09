@@ -3,7 +3,7 @@ import { Box, Button, CircularProgress, ClickAwayListener, FormHelperText, Input
 import CloseIcon from '@mui/icons-material/Close';
 import CompanyService from '../../services/company-service';
 
-const searchFieldWidthXs = '50vw';
+const searchFieldWidthXs = '70vw';
 const searchFieldWidthMd = '30vw';
 
 
@@ -77,7 +77,7 @@ const SearchField = ({ handleCompanySelect }) => {
     <ClickAwayListener onClickAway={e => setOpen(false)}>
       <Box sx={{ width: { xs: searchFieldWidthXs, md: searchFieldWidthMd } }}>
         <FormHelperText error sx={{ visibility: isValid ? 'hidden' : 'visible' }}>* Only letters and whitespace allowed</FormHelperText>
-        <FormHelperText error sx={{ visibility: isTooLong ? 'visible' : 'hidden', pb: '5px' }}>* Too long, only 35 characters(whitespace incl.) allowed</FormHelperText>
+        <FormHelperText error sx={{ visibility: isTooLong ? 'visible' : 'hidden', pb: '5px' }}>* Too long, only 35 characters allowed</FormHelperText>
         <StyledTextField
           id='search'
           label='Search stock'
