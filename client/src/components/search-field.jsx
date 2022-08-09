@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { Box, ClickAwayListener, FormHelperText, InputAdornment, styled, TextField, Typography } from '@mui/material';
+import { Box, Button, ClickAwayListener, FormHelperText, InputAdornment, styled, TextField, Typography } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
+import CompanyService from '../services/company-service';
 
 const searchFieldWidth = "30vw";
 
@@ -18,6 +19,8 @@ const StyledBox = styled(Box)(() => ({
 
 const SearchField = () => {
   const [fieldValue, setFieldValue] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [companies, setCompanies] = useState([]);
   const [open, setOpen] = useState(fieldValue === '' ? false : true);
   const [isValid, setIsValid] = useState(true);
   const [isTooLong, setIsTooLong] = useState(false);
@@ -27,18 +30,26 @@ const SearchField = () => {
     value.length <= 35 ? setIsTooLong(false) : setIsTooLong(true)
   }
 
+  const fetchCompanies = async () => {
+    const { result } = await CompanyService.getCompanies(fieldValue)
+    setCompanies(result)
+  }
+
+  useEffect(() => {
+    if (fieldValue !== "") {
+      setLoading(true)
+      fetchCompanies()
+      setLoading(false)
+    }
+  }, [fieldValue])
+
   const handleClick = () => {
     setFieldValue('')
     setOpen(false)
   }
 
   useEffect(() => {
-    if(fieldValue !== "") {
-      validate(fieldValue)
-    } else {
-      setIsValid(true)
-      setIsTooLong(false)
-    }
+    validate(fieldValue)
   }, [fieldValue])
 
   return (
@@ -62,7 +73,7 @@ const SearchField = () => {
           }}
         />
         <StyledBox display={open ? 'block' : 'none'}>
-          {fieldValue === "" ? <Typography>Search by stock symbol</Typography> : <Typography>Company list coming soon</Typography>}
+        {loading ? null : fieldValue === "" ? <Typography>Search by stock symbol</Typography> : companies.map(company => <Button sx={{ width: "100%", justifyContent: "start" }} key={company.displaySymbol}>{company.displaySymbol} | {company.description}</Button>)}
         </StyledBox>
       </Box>
     </ClickAwayListener>
