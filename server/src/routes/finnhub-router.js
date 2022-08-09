@@ -24,4 +24,13 @@ router.get('/company/:symbol', (req, res) => {
   });
 })
 
+router.get('/stock/candle', (req, res) => {
+  const { symbol, resolution, from, to } = req.query
+  console.log(req.query)
+  finnhubClient.stockCandles(symbol, resolution, from, to, (error, data, response) => {
+    console.log(data)
+    res.status(200).send(data)
+  });
+})
+
 module.exports = router;

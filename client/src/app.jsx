@@ -19,7 +19,6 @@ const App = () => {
   const [company, setCompany] = useState('')
 
   const handleCompanySelect = ({ symbol }) => {
-    console.log("Sauna", symbol)
     setCompany(symbol)
   }
 
