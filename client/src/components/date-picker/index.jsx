@@ -1,35 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Box, TextField } from '@mui/material';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DesktopDatePicker } from '@mui/x-date-pickers';
 
-const DatePicker = () => {
-  const date = new Date()
-  const defaultFromValue = new Date(date.setMonth(date.getMonth() - 1))
-
-  const [fromValue, setFromValue] = useState(defaultFromValue);
-  const [toValue, setToValue] = useState(new Date());
-
-  const handleFromChange = (newValue) => {
-    if (toValue && newValue > toValue) {
-      alert("Choose a valid date")
-    } else if (newValue > new Date()) {
-      alert("You can not choose future date")
-    } else {
-      setFromValue(newValue)
-    }
-  }
-
-  const handleToChange = (newValue) => {
-    if (fromValue && newValue < fromValue) {
-      alert("Choose a valid date")
-    } else if (newValue > new Date()) {
-      alert("You can not choose future date")
-    } else {
-      setToValue(newValue)
-    }
-  }
+const DatePicker = ({handleFromChange, handleToChange, fromValue, toValue }) => {
 
   return (
     <Box>

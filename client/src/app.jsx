@@ -8,7 +8,7 @@ import {
 } from '@mui/material';
 import SearchField from './components/search-field';
 import CompanyInfo from './components/company-info';
-import DatePicker from './components/date-picker';
+import StockCandleChart from './components/stock-candle-data';
 
 const StyledBox = styled(Box)(() => ({
   display: 'flex',
@@ -31,7 +31,7 @@ const App = () => {
           <SearchField handleCompanySelect={handleCompanySelect} />
           <Box display={company ? 'block' : 'none' }>
             <CompanyInfo company={company} />
-            <DatePicker />
+            <StockCandleChart />
           </Box>
         </StyledBox >
       </Container>
