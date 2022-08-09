@@ -14,6 +14,7 @@ const theme = createTheme({
   },
   typography: {
     fontFamily: [
+      'Josefin Sans',
       '-apple-system',
       'BlinkMacSystemFont',
       '"Segoe UI"',
