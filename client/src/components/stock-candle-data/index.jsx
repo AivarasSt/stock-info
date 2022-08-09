@@ -9,7 +9,7 @@ import CandlestickChart from '../candlestick-chart';
 
 const StockCandleChart = ({ company }) => {
   const date = new Date()
-  const defaultFromValue = new Date(date.setMonth(date.getDay() - 1))
+  const defaultFromValue = new Date(date.setDate(date.getDate() - 1))
 
   const [fromValue, setFromValue] = useState(defaultFromValue);
   const [toValue, setToValue] = useState(new Date());
