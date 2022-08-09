@@ -25,6 +25,15 @@ const CompanyService = new (class CompanyService {
     }
   };
 
+  getStockCandleData = async ({symbol, resolution, from, to}) => {
+    try {
+      const data = await this.requester.get(`/stock/candle`, {params: {symbol, resolution, from, to}});
+      return data;
+    } catch ({ message }) {
+      return { success: false, message };
+    }
+  };
+
 })();
 
 export default CompanyService;

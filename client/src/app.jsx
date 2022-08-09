@@ -31,7 +31,7 @@ const App = () => {
           <SearchField handleCompanySelect={handleCompanySelect} />
           <Box display={company ? 'block' : 'none' }>
             <CompanyInfo company={company} />
-            <StockCandleChart />
+            <StockCandleChart company={company}/>
           </Box>
         </StyledBox >
       </Container>

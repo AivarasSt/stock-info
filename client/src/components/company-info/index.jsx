@@ -7,7 +7,6 @@ const CompanyInfo = ({ company }) => {
   const [companyProfile, setCompanyProfile] = useState([])
 
   useEffect(() => {
-    console.log(company)
     setSelectedCompany(company)
   }, [company])
 
