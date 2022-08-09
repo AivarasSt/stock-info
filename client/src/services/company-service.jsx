@@ -8,8 +8,21 @@ const CompanyService = new (class CompanyService {
   };
 
   getCompanies = async (searchTerm) => {
+    try {
     const { data } = await this.requester.get(`/search`, {params: {searchTerm} });
     return data;
+  } catch ({ message }) {
+    return { success: false, message };
+  }
+  };
+
+  getCompanyProfile = async (symbol) => {
+    try {
+      const data = await this.requester.get(`/company/${symbol}`);
+      return data;
+    } catch ({ message }) {
+      return { success: false, message };
+    }
   };
 
 })();

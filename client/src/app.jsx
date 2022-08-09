@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Box,
   CssBaseline,
@@ -7,6 +7,7 @@ import {
   styled
 } from '@mui/material';
 import SearchField from './components/search-field';
+import CompanyInfo from './components/company-info/company-info';
 
 const StyledBox = styled(Box)(() => ({
   display: 'flex',
@@ -15,13 +16,20 @@ const StyledBox = styled(Box)(() => ({
 }))
 
 const App = () => {
+  const [company, setCompany] = useState('')
+
+  const handleCompanySelect = ({ symbol }) => {
+    console.log("Sauna", symbol)
+    setCompany(symbol)
+  }
 
   return (
     <CssBaseline>
       <Container component='main' maxWidth='lg' sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
         <StyledBox  sx={{ pt: '5vh' }}>
           <Typography variant='h1'>Stock Market Info</Typography>
-          <SearchField />
+          <SearchField handleCompanySelect={handleCompanySelect} />
+          <CompanyInfo company={company} />
         </StyledBox >
       </Container>
     </CssBaseline>

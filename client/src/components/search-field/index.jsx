@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Box, Button, CircularProgress, ClickAwayListener, FormHelperText, InputAdornment, styled, TextField, Typography } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
-import CompanyService from '../services/company-service';
+import CompanyService from '../../services/company-service';
 
 const searchFieldWidth = '30vw';
 
@@ -20,7 +20,7 @@ const StyledBox = styled(Box)(() => ({
   alignItems: 'center',
 }))
 
-const SearchField = () => {
+const SearchField = ({ handleCompanySelect }) => {
   const [fieldValue, setFieldValue] = useState('');
   const [loading, setLoading] = useState(false);
   const [companies, setCompanies] = useState([]);
@@ -37,9 +37,7 @@ const SearchField = () => {
     setLoading(true)
     const { result } = await CompanyService.getCompanies(fieldValue)
     setCompanies(result)
-    setTimeout(() => {
-      setLoading(false)
-    }, 1000);
+    setLoading(false)
   }
 
   useEffect(() => {
@@ -50,6 +48,11 @@ const SearchField = () => {
 
   const handleClick = () => {
     setFieldValue('')
+    setOpen(false)
+  }
+
+  const handleCompanyClick = (company) => {
+    handleCompanySelect(company)
     setOpen(false)
   }
 
@@ -77,8 +80,8 @@ const SearchField = () => {
             ),
           }}
         />
-        <StyledBox display={open ? loading ? 'flex' : 'block' : 'none'} >
-        {loading ? <CircularProgress sx={{ alignSelf: 'center', width: '30px', height: '30px' }} /> : fieldValue === '' ? <Typography sx={{ m: '5px'}}>Search by stock symbol</Typography> : companies.map(company => <Button sx={{ width: '100%', justifyContent: 'start' }} key={company.displaySymbol}>{company.displaySymbol} | {company.description}</Button>)}
+        <StyledBox display={open ? loading ? 'flex' : 'block' : 'none'} sx={{ position: 'absolute' }} >
+          {loading ? <CircularProgress sx={{ alignSelf: 'center', width: '30px', height: '30px' }} /> : fieldValue === '' ? <Typography sx={{ m: '5px' }}>Search by stock symbol</Typography> : companies.map(company => <Button onClick={e => handleCompanyClick(company)} sx={{ width: '100%', justifyContent: 'start' }} key={company.displaySymbol}>{company.displaySymbol} | {company.description}</Button>)}
         </StyledBox>
       </Box>
     </ClickAwayListener>
