@@ -3,7 +3,7 @@ import { FormControl, InputLabel, MenuItem, Select } from '@mui/material';
 
 const ResolutionSelect = ({ handleResolution, resolution }) => {
   return (
-    <FormControl sx={{ width: '150px' }}>
+    <FormControl sx={{ width: { xs:'30vw', lg: '10vw' }, flexGrow: '1' }}>
       <InputLabel id="resolution-select-label">Resolution</InputLabel>
       <Select
         labelId="resolution-select-label"

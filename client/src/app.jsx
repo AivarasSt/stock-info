@@ -30,7 +30,7 @@ const App = () => {
       <CssBaseline>
         <Container component='main' maxWidth='lg' sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
           <StyledBox sx={{ pt: '5vh' }}>
-            <Typography variant='h1'>Stock Market Info</Typography>
+            <Typography variant='h1' sx={{ fontSize: {xs: '15vw', sm: '10vw', lg: '5vw'}, textAlign: 'center' }}>Stock Market Info</Typography>
             <SearchField handleCompanySelect={handleCompanySelect} />
             <Box display={company ? 'block' : 'none'}>
               <CompanyInfo company={company} />

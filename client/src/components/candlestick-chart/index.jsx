@@ -1,6 +1,7 @@
 import React from 'react';
 import Chart from 'react-apexcharts';
 import dayjs from 'dayjs';
+import { Box } from '@mui/material';
 
 const CandlestickChart = ({ stockCandleData }) => {
 
@@ -32,12 +33,15 @@ const CandlestickChart = ({ stockCandleData }) => {
   ]
 
   return (
-    <Chart
-      options={options}
-      series={series}
-      type="candlestick"
-      width="800"
-    />
+    <Box sx={{ flexGrow: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <Box sx={{ width: '80%', mx: 'auto' }}>
+      <Chart
+        options={options}
+        series={series}
+        type="candlestick"
+        />
+        </Box>
+    </Box>
   )
 }
 

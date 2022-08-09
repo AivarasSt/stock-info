@@ -3,22 +3,29 @@ import { Box, Button, CircularProgress, ClickAwayListener, FormHelperText, Input
 import CloseIcon from '@mui/icons-material/Close';
 import CompanyService from '../../services/company-service';
 
-const searchFieldWidth = '30vw';
+const searchFieldWidthXs = '50vw';
+const searchFieldWidthMd = '30vw';
 
-const StyledTextField = styled(TextField)(() => ({
-  minWidth: searchFieldWidth
+
+const StyledTextField = styled(TextField)(({ theme }) => ({
+  width: searchFieldWidthXs,
+  [theme.breakpoints.up('md')]: {
+    width: searchFieldWidthMd
+  },
 }))
 
-const StyledBox = styled(Box)(() => ({
-  minWidth: searchFieldWidth,
+const StyledBox = styled(Box)(({ theme }) => ({
+  width: searchFieldWidthXs,
   minHeight: '35px',
   maxHeight: '300px',
   overflowY: 'scroll',
-  width: '300px',
   background: '#fdfffe',
   justifyContent: 'center',
   alignItems: 'center',
   zIndex: 1000,
+  [theme.breakpoints.up('md')]: {
+    width: searchFieldWidthMd
+  },
 }))
 
 const SearchField = ({ handleCompanySelect }) => {
@@ -68,7 +75,7 @@ const SearchField = ({ handleCompanySelect }) => {
 
   return (
     <ClickAwayListener onClickAway={e => setOpen(false)}>
-      <Box>
+      <Box sx={{ width: { xs: searchFieldWidthXs, md: searchFieldWidthMd } }}>
         <FormHelperText error sx={{ visibility: isValid ? 'hidden' : 'visible' }}>* Only letters and whitespace allowed</FormHelperText>
         <FormHelperText error sx={{ visibility: isTooLong ? 'visible' : 'hidden', pb: '5px' }}>* Too long, only 35 characters(whitespace incl.) allowed</FormHelperText>
         <StyledTextField
@@ -87,7 +94,7 @@ const SearchField = ({ handleCompanySelect }) => {
           }}
         />
         <StyledBox display={open ? loading ? 'flex' : 'block' : 'none'} sx={{ position: 'absolute' }} >
-          {loading ? <CircularProgress sx={{ alignSelf: 'center', width: '30px', height: '30px' }} /> : fieldValue === '' ? <Typography sx={{ m: '5px' }}>Search by stock symbol</Typography> : companies.map(company => <Button onClick={e => handleCompanyClick(company)} sx={{ width: '100%', justifyContent: 'start' }} key={company.displaySymbol}>{company.displaySymbol} | {company.description}</Button>)}
+          {loading ? <CircularProgress sx={{ alignSelf: 'center', width: '30px', height: '30px' }} /> : fieldValue === '' ? <Typography sx={{ m: '5px' }}>Search by stock symbol</Typography> : companies.filter(company => company.type === 'Common Stock').map(company => <Button onClick={e => handleCompanyClick(company)} sx={{ width: '100%', justifyContent: 'start' }} key={company.displaySymbol}>{company.displaySymbol} | {company.description}</Button> )}
         </StyledBox>
       </Box>
     </ClickAwayListener>

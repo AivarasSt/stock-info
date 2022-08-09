@@ -63,9 +63,11 @@ const StockCandleChart = ({ company }) => {
   }
 
   return (
-    <Box>
-      <DatePicker handleFromChange={handleFromChange} handleToChange={handleToChange} fromValue={fromValue} toValue={toValue} />
-      <ResolutionSelect handleResolution={handleResolution} resolution={resolution} />
+    <Box sx={{ width: '70vw', height: '70vh', display: 'flex', justifyContent: 'center' }}>
+      <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'space-around', m: '2vw' }}>
+        <DatePicker handleFromChange={handleFromChange} handleToChange={handleToChange} fromValue={fromValue} toValue={toValue} />
+        <ResolutionSelect handleResolution={handleResolution} resolution={resolution} />
+      </Box>
       <CandlestickChart stockCandleData={stockCandleData} />
     </Box>
   )
