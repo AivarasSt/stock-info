@@ -11,13 +11,14 @@ const StyledTextField = styled(TextField)(() => ({
 
 const StyledBox = styled(Box)(() => ({
   minWidth: searchFieldWidth,
-  minHeight: '80px',
+  minHeight: '35px',
   maxHeight: '300px',
   overflowY: 'scroll',
   width: '300px',
   background: '#fdfffe',
   justifyContent: 'center',
   alignItems: 'center',
+  zIndex: 1000,
 }))
 
 const SearchField = ({ handleCompanySelect }) => {
