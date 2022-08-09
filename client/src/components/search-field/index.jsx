@@ -52,8 +52,13 @@ const SearchField = ({ handleCompanySelect }) => {
     setOpen(false)
   }
 
+  const handleFieldChange = (value) => {
+    setFieldValue(value)
+  }
+
   const handleCompanyClick = (company) => {
     handleCompanySelect(company)
+    setFieldValue(company.symbol)
     setOpen(false)
   }
 
@@ -72,7 +77,7 @@ const SearchField = ({ handleCompanySelect }) => {
           variant='outlined'
           value={fieldValue}
           onFocus={e => setOpen(true)}
-          onInput={e => setFieldValue(e.target.value)}
+          onInput={e => handleFieldChange(e.target.value)}
           InputProps={{
             endAdornment: (
               <InputAdornment position='end'>
