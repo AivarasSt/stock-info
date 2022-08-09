@@ -3,10 +3,19 @@ import React, { useEffect, useState } from 'react'
 import CompanyService from '../../services/company-service';
 import LogoBox from '../logo-box';
 
-const StyledBox = styled(Box)(({ theme }) => ({
+const StyledBox = styled(Box)(() => ({
   display: 'flex',
   flexDirection: 'column',
-  justifyContent: 'end',
+}));
+
+const StyledTypography = styled(Typography)(({ theme }) => ({
+  fontSize: '3vw',
+  [theme.breakpoints.up('md')]: {
+    fontSize: '2vw',
+  },
+  [theme.breakpoints.up('lg')]: {
+    fontSize: '1vw',
+  },
 }));
 
 const CompanyInfo = ({ company }) => {
@@ -30,16 +39,16 @@ const CompanyInfo = ({ company }) => {
   }, [selectedCompany])
 
   return (
-    <Box sx={{ display: 'flex', justifyContent: 'space-between', m: '1vw', p: '5px', borderBottom: '1px solid'}}>
+    <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', m: '1vw', p: '5px', borderBottom: '1px solid'}}>
       <StyledBox>
-        <Typography sx={{ fontSize: '3vw' }}>{companyProfile.ticker}</Typography>
-        <Typography>{companyProfile.name}</Typography>
+        <Typography sx={{ fontSize: { xs: '7vw', md: '3vw' }, lineHeight: '1.2'}}>{companyProfile.ticker}</Typography>
+        <StyledTypography>{companyProfile.name}</StyledTypography>
       </StyledBox>
       <LogoBox imgUrl={companyProfile.logo}  />
       <StyledBox>
         <Link href={companyProfile.weburl}>{companyProfile.weburl}</Link>
-        <Typography sx={{ textAlign: 'end' }}>{companyProfile.country}</Typography>
-        <Typography sx={{ textAlign: 'end' }}>{companyProfile.currency}</Typography>
+        <StyledTypography sx={{ textAlign: 'end' }}>{companyProfile.country}</StyledTypography>
+        <StyledTypography sx={{ textAlign: 'end' }}>{companyProfile.currency}</StyledTypography>
       </StyledBox>
     </Box>
 

@@ -6,10 +6,11 @@ const StyledBox = styled(Box)(({ theme }) => ({
   width: '15vw',
   backgroundSize: 'cover',
   backgroundPosition: 'center',
-  display: 'flex',
+  display: 'none',
   justifyContent: 'center',
   alignItems: 'center',
   [theme.breakpoints.up('sm')]: {
+    display: 'flex',
     height: '8vw',
     width: '8vw',
   },
