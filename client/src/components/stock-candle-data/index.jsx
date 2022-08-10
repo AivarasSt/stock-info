@@ -18,8 +18,10 @@ const StockCandleChart = ({ company }) => {
 
   const fetchCandle = async (searchData) => {
     const { data } = await CompanyService.getStockCandleData(searchData)
-    const formatedCandleData = data.t.map((el, i) => [el, data.o[i], data.h[i], data.l[i], data.c[i]])
-    setStockCandleData(formatedCandleData)
+    if(data){
+      const formatedCandleData = data.t.map((el, i) => [el, data.o[i], data.h[i], data.l[i], data.c[i]])
+      setStockCandleData(formatedCandleData)
+    }
   }
 
   useEffect(() => {
