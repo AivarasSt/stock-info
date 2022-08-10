@@ -35,6 +35,7 @@ const SearchField = ({ handleCompanySelect }) => {
   const [open, setOpen] = useState(fieldValue === '' ? false : true);
   const [isValid, setIsValid] = useState(true);
   const [isTooLong, setIsTooLong] = useState(false);
+  const [notFound, setNotFound] = useState(false);
 
   const validate = (value) => {
     if (value.match(/^[a-zA-Z\s]*$/)) {
@@ -53,6 +54,11 @@ const SearchField = ({ handleCompanySelect }) => {
     if (value) {
       setLoading(true)
       const { result } = await CompanyService.getCompanies(value)
+      if(result.length === 0) {
+        setNotFound(true)
+      } else {
+        setNotFound(false)
+      }
       setCompanies(result)
       setLoading(false)
     }
@@ -104,7 +110,15 @@ const SearchField = ({ handleCompanySelect }) => {
           }}
         />
         <StyledBox display={open ? loading ? 'flex' : 'block' : 'none'} sx={{ position: 'absolute' }} >
-          {loading ? <CircularProgress sx={{ alignSelf: 'center', width: '30px', height: '30px' }} /> : fieldValue === '' ? <Typography sx={{ m: '5px' }}>Search by stock symbol</Typography> : companies.filter(company => company.type === 'Common Stock').map(company => <Button onClick={e => handleCompanyClick(company)} sx={{ width: '100%', justifyContent: 'start' }} key={company.displaySymbol}>{company.displaySymbol} | {company.description}</Button>)}
+          {
+            loading
+              ? <CircularProgress sx={{ alignSelf: 'center', width: '30px', height: '30px' }} />
+              : fieldValue === ''
+                ? <Typography sx={{ m: '5px' }}>Search by stock symbol</Typography>
+                : !notFound 
+                ? companies.filter(company => company.type === 'Common Stock').map(company => <Button onClick={e => handleCompanyClick(company)} sx={{ width: '100%', justifyContent: 'start' }} key={company.displaySymbol}>{company.displaySymbol} | {company.description}</Button>)
+                : <Typography sx={{ m: '5px' }}>Symbol not found</Typography>
+          }
         </StyledBox>
       </Box>
     </ClickAwayListener>
