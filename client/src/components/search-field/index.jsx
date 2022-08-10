@@ -37,20 +37,30 @@ const SearchField = ({ handleCompanySelect }) => {
   const [isTooLong, setIsTooLong] = useState(false);
 
   const validate = (value) => {
-    value.match(/^[a-zA-Z\s]*$/) ? setIsValid(true) : setIsValid(false)
-    value.length <= 35 ? setIsTooLong(false) : setIsTooLong(true)
+    if (value.match(/^[a-zA-Z\s]*$/)) {
+      setIsValid(true)
+      if (value.length <= 35) {
+        return value
+      } else {
+        setIsTooLong(true)
+      }
+    } else {
+      setIsValid(false)
+    }
   }
 
-  const fetchCompanies = async () => {
-    setLoading(true)
-    const { result } = await CompanyService.getCompanies(fieldValue)
-    setCompanies(result)
-    setLoading(false)
+  const fetchCompanies = async (value) => {
+    if(value){
+      setLoading(true)
+      const { result } = await CompanyService.getCompanies(value)
+      setCompanies(result)
+      setLoading(false)
+    }
   }
 
   useEffect(() => {
     if (fieldValue !== '') {
-      fetchCompanies()
+      fetchCompanies(validate(fieldValue))
     }
   }, [fieldValue])
 
@@ -94,7 +104,7 @@ const SearchField = ({ handleCompanySelect }) => {
           }}
         />
         <StyledBox display={open ? loading ? 'flex' : 'block' : 'none'} sx={{ position: 'absolute' }} >
-          {loading ? <CircularProgress sx={{ alignSelf: 'center', width: '30px', height: '30px' }} /> : fieldValue === '' ? <Typography sx={{ m: '5px' }}>Search by stock symbol</Typography> : companies.filter(company => company.type === 'Common Stock').map(company => <Button onClick={e => handleCompanyClick(company)} sx={{ width: '100%', justifyContent: 'start' }} key={company.displaySymbol}>{company.displaySymbol} | {company.description}</Button> )}
+          {loading ? <CircularProgress sx={{ alignSelf: 'center', width: '30px', height: '30px' }} /> : fieldValue === '' ? <Typography sx={{ m: '5px' }}>Search by stock symbol</Typography> : companies.filter(company => company.type === 'Common Stock').map(company => <Button onClick={e => handleCompanyClick(company)} sx={{ width: '100%', justifyContent: 'start' }} key={company.displaySymbol}>{company.displaySymbol} | {company.description}</Button>)}
         </StyledBox>
       </Box>
     </ClickAwayListener>
