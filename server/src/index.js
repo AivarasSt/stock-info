@@ -17,6 +17,6 @@ server.use(cors(corsOptions));
 server.use('/', finnhubRouter);
 
 server.listen(SERVER_PORT, () => {
-  console.log(`serveris veikia ant ${SERVER_PORT} porto`)
+  console.log(`Server is running on ${SERVER_PORT} port`)
 });
 
