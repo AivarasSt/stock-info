@@ -44,11 +44,12 @@ const CandlestickChart = ({ stockCandleData }) => {
 
   return (
     <Box sx={{ flexGrow: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Box sx={{ width: '80%', mx: 'auto' }}>
+      <Box sx={{ mx: 'auto', height: '50vh' }}>
       <Chart
         options={options}
         series={series}
         type="candlestick"
+        height="100%"
         />
         </Box>
     </Box>
