@@ -16,7 +16,7 @@ const StyledTextField = styled(TextField)(({ theme }) => ({
 
 const StyledBox = styled(Box)(({ theme }) => ({
   width: searchFieldWidthXs,
-  minHeight: '35px',
+  minHeight: '60px',
   maxHeight: '300px',
   overflowY: 'scroll',
   background: '#fdfffe',
