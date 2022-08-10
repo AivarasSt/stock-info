@@ -18,9 +18,11 @@ const StockCandleChart = ({ company }) => {
 
   const fetchCandle = async (searchData) => {
     const { data } = await CompanyService.getStockCandleData(searchData)
-    if(data){
+    if (data.s === 'ok') {
       const formatedCandleData = data.t.map((el, i) => [el, data.o[i], data.h[i], data.l[i], data.c[i]])
       setStockCandleData(formatedCandleData)
+    } else {
+      setStockCandleData([])
     }
   }
 
@@ -42,22 +44,20 @@ const StockCandleChart = ({ company }) => {
 
   const handleFromChange = (newValue) => {
     if (toValue && newValue > toValue) {
-      alert("Choose a valid date")
+      setToValue(newValue)
     } else if (newValue > new Date()) {
       alert("You can not choose future date")
-    } else {
-      setFromValue(newValue)
     }
+    setFromValue(newValue)
   }
 
   const handleToChange = (newValue) => {
     if (fromValue && newValue < fromValue) {
-      alert("Choose a valid date")
+      setFromValue(newValue)
     } else if (newValue > new Date()) {
       alert("You can not choose future date")
-    } else {
-      setToValue(newValue)
     }
+    setToValue(newValue)
   }
 
   const handleResolution = (value) => {
@@ -65,8 +65,8 @@ const StockCandleChart = ({ company }) => {
   }
 
   return (
-    <Box sx={{ width: {xs: '90vw', sm: '80vw', md: '70vw'}, height: {xs: '90vh', lg: '55vh'}, display: 'flex', flexDirection: {xs: 'column', lg: 'row' }, justifyContent: 'center' }}>
-      <Box sx={{ display: 'flex', flexDirection: {xs: 'row', lg: 'column'}, alignItems: 'center', justifyContent: 'space-around', m: '2vw' }}>
+    <Box sx={{ width: { xs: '90vw', sm: '80vw', md: '70vw' }, height: { xs: '90vh', lg: '55vh' }, display: 'flex', flexDirection: { xs: 'column', lg: 'row' }, justifyContent: 'center' }}>
+      <Box sx={{ display: 'flex', flexDirection: { xs: 'row', lg: 'column' }, alignItems: 'center', justifyContent: 'space-around', m: '2vw' }}>
         <DatePicker handleFromChange={handleFromChange} handleToChange={handleToChange} fromValue={fromValue} toValue={toValue} />
         <ResolutionSelect handleResolution={handleResolution} resolution={resolution} />
       </Box>
