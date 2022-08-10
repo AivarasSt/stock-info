@@ -9,6 +9,16 @@ const CandlestickChart = ({ stockCandleData }) => {
     chart: {
       id: "basic-bar"
     },
+    noData: {
+      text: 'No data for selected period available',
+      align: 'center',
+      verticalAlign: 'middle',
+      offsetX: 0,
+      offsetY: 0,
+      style: {
+        fontSize: '14px',
+      }
+    },
     xaxis: {
       type: 'datetime',
       tickPlacement: 'on',
