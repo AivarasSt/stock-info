@@ -27,7 +27,7 @@ router.get('/company/:symbol', (req, res) => {
 router.get('/stock/candle', (req, res) => {
   const { symbol, resolution, from, to } = req.query
   finnhubClient.stockCandles(symbol, resolution, from, to, (error, data, response) => {
-    if (data) {
+    if (data.s === 'ok') {
       const candles = data.t.map((el, i) => ({ [dayjs.unix(el)]: { open: data.o[i], high: data.h[i], low: data.l[i], close: data.c[i] } }))
       const formatedData = { symbol: symbol, from: dayjs.unix(from).format('DD/MM/YY'), to: dayjs.unix(to).format('DD/MM/YY'), resolution: resolution, candleData: { candles }}
       console.dir(formatedData, { depth: null })
