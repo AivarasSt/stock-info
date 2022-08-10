@@ -1,5 +1,5 @@
 import { Box } from '@mui/material';
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import CompanyService from '../../services/company-service';
 import DatePicker from '../date-picker';
 import ResolutionSelect from '../resolution-select';
@@ -40,7 +40,26 @@ const StockCandleChart = ({ company }) => {
       }
       fetchCandle(candleData)
     }
-  }, [selectedCompany, resolution, toValue, fromValue, company])
+  }, [selectedCompany])
+
+  const isFirstRun = useRef(true);
+
+  useEffect (() => {
+    if (isFirstRun.current) {
+      isFirstRun.current = false;
+      return;
+    }
+    if (company !== '') {
+      const candleData = {
+        symbol: company,
+        resolution: resolution,
+        from: dayjs(fromValue).unix(),
+        to: dayjs(toValue).unix(),
+      }
+      fetchCandle(candleData)
+    }
+  }, [resolution, toValue, fromValue]);
+
 
   const handleFromChange = (newValue) => {
     if (toValue && newValue > toValue) {
