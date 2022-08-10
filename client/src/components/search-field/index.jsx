@@ -50,7 +50,7 @@ const SearchField = ({ handleCompanySelect }) => {
   }
 
   const fetchCompanies = async (value) => {
-    if(value){
+    if (value) {
       setLoading(true)
       const { result } = await CompanyService.getCompanies(value)
       setCompanies(result)
@@ -59,9 +59,13 @@ const SearchField = ({ handleCompanySelect }) => {
   }
 
   useEffect(() => {
-    if (fieldValue !== '') {
-      fetchCompanies(validate(fieldValue))
-    }
+    const timer = setTimeout(() => {
+      if (fieldValue !== '') {
+        fetchCompanies(validate(fieldValue))
+      }
+    }, 500)
+
+    return () => clearTimeout(timer);
   }, [fieldValue])
 
   const handleClick = () => {
