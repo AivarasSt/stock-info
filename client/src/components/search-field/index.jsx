@@ -47,6 +47,11 @@ const SearchField = ({ handleCompanySelect }) => {
       }
     } else {
       setIsValid(false)
+      if (value.length <= 35) {
+        setIsTooLong(false)
+      } else {
+        setIsTooLong(true)
+      }
     }
   }
 
