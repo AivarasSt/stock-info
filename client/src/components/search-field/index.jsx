@@ -41,6 +41,7 @@ const SearchField = ({ handleCompanySelect }) => {
     if (value.match(/^[a-zA-Z\s]*$/)) {
       setIsValid(true)
       if (value.length <= 35) {
+        setIsTooLong(false)
         return value
       } else {
         setIsTooLong(true)
