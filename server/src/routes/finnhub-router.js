@@ -13,7 +13,6 @@ const finnhubClient = new finnhub.DefaultApi();
 
 router.get('/search', (req, res) => {
   const { searchTerm } = req.query
-  console.log(req.originalUrl)
   finnhubClient.symbolSearch(searchTerm, (error, data, response) => {
     res.status(200).send(data)
   });

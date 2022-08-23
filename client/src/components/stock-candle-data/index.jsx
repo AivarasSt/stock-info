@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { Box } from '@mui/material';
 import React, { useEffect, useRef, useState } from 'react'
 import CompanyService from '../../services/company-service';
